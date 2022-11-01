@@ -45,7 +45,9 @@ const updateProject = asyncHandler(async (req: Request, res: Response) => {
     throw new Error(`${req.params.id} is not a valid id`);
   }
 
-  const project = await Project.findByIdAndUpdate(req.params.id, req.body);
+  const project = await Project.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
   if (!project) {
     res.status(404);
     throw new Error("Project not found");
